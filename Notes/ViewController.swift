@@ -30,5 +30,7 @@ class ViewController: NSViewController {
         textView.textStorage?.setAttributedString(document.text)
     }
 
+    @IBAction func addAttachment(_ sender: NSButton) {
+    }
 }
 

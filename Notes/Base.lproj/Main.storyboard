@@ -697,7 +697,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="496" height="179"/>
-                                            <size key="maxSize" width="496" height="10000000"/>
+                                            <size key="maxSize" width="498" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
                                     </subviews>
@@ -748,6 +748,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="addAttachment:" target="5gI-5U-AMq" id="4UM-CK-sCJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -764,6 +767,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="attachmentsList" destination="Coo-mr-ca5" id="O0s-d9-AH7"/>
                         <outlet property="textView" destination="PYV-HA-doP" id="OXM-6m-Z1f"/>
                     </connections>
                 </viewController>

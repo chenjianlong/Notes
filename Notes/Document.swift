@@ -36,25 +36,6 @@ import Cocoa
     }
 }*/
 
-enum NoteDocumentFileNames : String {
-    case TextFile = "Text.rtf"
-    case AttachmentsDirectory = "Attachments"
-}
-
-enum ErrorCode : Int {
-    case CannotAccessDocument
-    case CannotLoadFileWrappers
-    case CannotLoadText
-    case CannotAccessAttachments
-    case CannotSaveText
-    case CannotSaveAttachment
-}
-
-let ErrorDomain = "NotesErrorDomain"
-
-func err(code: ErrorCode, _ userInfo: [NSObject: AnyObject]? = nil) -> NSError {
-    return NSError(domain: ErrorDomain, code: code.rawValue, userInfo: userInfo)
-}
 
 class Document: NSDocument {
     var text : NSAttributedString = NSAttributedString()
