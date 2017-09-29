@@ -154,6 +154,16 @@ class DocumentListViewController: UICollectionViewController {
             }
             
             availableFiles.append(url)
+            
+            if itemIsOpenable(url: url) == true {
+                continue
+            }
+            
+            do {
+                try FileManager.default.startDownloadingUbiquitousItem(at: url)
+            } catch let error as NSError {
+                print("Error downloading item! \(error)")
+            }
         }
     }
     
@@ -175,6 +185,14 @@ class DocumentListViewController: UICollectionViewController {
             }
         } catch {
             cell.fileNameLabel!.text = "Loading..."
+        }
+        
+        if (itemIsOpenable(url: url)) {
+            cell.alpha = 1.0
+            cell.isUserInteractionEnabled = true
+        } else {
+            cell.alpha = 0.5
+            cell.isUserInteractionEnabled = false
         }
         
         return cell
@@ -207,6 +225,36 @@ class DocumentListViewController: UICollectionViewController {
                 self.availableFiles.append(documentDestinationURL!)
                 self.collectionView?.reloadData()
             }
+        }
+    }
+    
+    func itemIsOpenable(url: URL?) -> Bool {
+        guard let itemURL = url else {
+            return false
+        }
+        
+        if DocumentListViewController.iCloudAvaiable == false {
+            return true
+        }
+        
+        var downloadStatus: URLResourceValues?
+        do {
+            var keys = Set<URLResourceKey>()
+            keys.insert(URLResourceKey.ubiquitousItemDownloadingStatusKey)
+            downloadStatus = try itemURL.resourceValues(forKeys: keys)
+        } catch let error as NSError {
+            NSLog("Failed to get downloading status for \(itemURL):\(error)")
+            return false
+        }
+        
+        guard let status = downloadStatus else {
+            return false
+        }
+        
+        if status.ubiquitousItemDownloadingStatus == URLUbiquitousItemDownloadingStatus.current {
+            return true
+        } else {
+            return false
         }
     }
 }
