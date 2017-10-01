@@ -63,6 +63,8 @@ class DocumentListViewController: UICollectionViewController {
                                 self.queryUpdated()
         }
         
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        
         let hasPromptedForiCloud = UserDefaults.standard.bool(forKey: NotesHasPromptedForiCloudKey)
         if hasPromptedForiCloud == false {
             let alert = UIAlertController(title: "Use iCloud?",
@@ -90,6 +92,14 @@ class DocumentListViewController: UICollectionViewController {
         } else {
             metadataQuery.start()
             refreshLocalFileList()
+        }
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        for visibleCell in self.collectionView?.visibleCells as! [FileCollectionViewCell] {
+            visibleCell.setEditing(editing: editing, animated: animated)
         }
     }
 
@@ -183,6 +193,17 @@ class DocumentListViewController: UICollectionViewController {
             if let fileName2 = fileName.name {
                 cell.fileNameLabel!.text = fileName2
             }
+            
+            cell.setEditing(editing: self.isEditing, animated: false)
+            cell.deletionHander = {
+                self.deleteDocumentAtURL(url: url)
+            }
+            
+            let labelTapRecognizer = UITapGestureRecognizer(target: cell, action: #selector(FileCollectionViewCell.renameTapped))
+            cell.fileNameLabel?.gestureRecognizers = [labelTapRecognizer]
+            cell.renameHander = {
+                self.renameDocumentAtURL(url: url)
+            }
         } catch {
             cell.fileNameLabel!.text = "Loading..."
         }
@@ -196,6 +217,58 @@ class DocumentListViewController: UICollectionViewController {
         }
         
         return cell
+    }
+    
+    func deleteDocumentAtURL(url: URL) {
+        let fileCoordinator = NSFileCoordinator(filePresenter: nil)
+        fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: {
+            (urlForModifying) -> Void in
+            do {
+                try FileManager.default.removeItem(at: urlForModifying)
+                
+                self.availableFiles = self.availableFiles.filter {
+                    $0 != url
+                }
+                
+                self.collectionView?.reloadData()
+            } catch let error as NSError {
+                let alert = UIAlertController(title: "Error deleting", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func renameDocumentAtURL(url: URL) {
+        let renameBox = UIAlertController(title: "Rename Document", message: nil, preferredStyle: .alert)
+        renameBox.addTextField(configurationHandler: {
+            (textField) -> Void in
+            let filename = url.lastPathComponent.replacingOccurrences(of: ".note", with: "")
+            textField.text = filename
+        })
+        
+        renameBox.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        renameBox.addAction(UIAlertAction(title: "Rename", style: .default) { (action) in
+            if let newName = renameBox.textFields?.first?.text {
+                let destinationURL = url.deletingLastPathComponent().appendingPathComponent(newName + ".note")
+                let fileCoordinator = NSFileCoordinator(filePresenter: nil)
+                fileCoordinator.coordinate(writingItemAt: url, options: [], writingItemAt: destinationURL, options: [], error: nil, byAccessor: { (origin, destination) -> Void in
+                    do {
+                        try FileManager.default.moveItem(at: origin, to: destination)
+                        self.availableFiles = self.availableFiles.filter {
+                            $0 != url
+                        }
+                        
+                        self.availableFiles.append(destination)
+                        self.collectionView?.reloadData()
+                    } catch let error as NSError {
+                        NSLog("Failed to move \(origin) to \(destination): \(error)")
+                    }
+                })
+            }
+        })
+        
+        self.present(renameBox, animated: true, completion: nil)
     }
     
     func createDocument() {
@@ -262,10 +335,26 @@ class DocumentListViewController: UICollectionViewController {
 class FileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var fileNameLabel: UILabel?
     @IBOutlet weak var imageView: UIImageView?
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBAction func deleteTapped(_ sender: UIButton) {
+        deletionHander?()
+    }
     
-    var renameHander : ((Void) -> Void)?
+    var renameHander : (() -> Void)?
+    var deletionHander : (() -> Void)?
     
     @IBAction func renameTapped() {
         renameHander?()
+    }
+    
+    func setEditing(editing: Bool, animated: Bool) {
+        let alpha : CGFloat = editing ? 1.0 : 0.0
+        if animated {
+            UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                self.deleteButton?.alpha = alpha
+            })
+        } else {
+            self.deleteButton?.alpha = alpha
+        }
     }
 }
