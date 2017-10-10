@@ -219,6 +219,23 @@ class DocumentListViewController: UICollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedItem = availableFiles[indexPath.row]
+        if itemIsOpenable(url: selectedItem) {
+            self.performSegue(withIdentifier: "ShowDocument", sender: selectedItem)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDocument", let documentVC = segue.destination as? DocumentViewController {
+            if let url = sender as? URL {
+                documentVC.documentURL = url
+            } else {
+                fatalError("ShowDocument segue was called with an invalid sender of type \(type(of: sender))")
+            }
+        }
+    }
+    
     func deleteDocumentAtURL(url: URL) {
         let fileCoordinator = NSFileCoordinator(filePresenter: nil)
         fileCoordinator.coordinate(writingItemAt: url, options: .forDeleting, error: nil, byAccessor: {
@@ -271,6 +288,11 @@ class DocumentListViewController: UICollectionViewController {
         self.present(renameBox, animated: true, completion: nil)
     }
     
+    func openDocumentWithPath(path: String) {
+        let url = URL(fileURLWithPath: path)
+        self.performSegue(withIdentifier: "ShowDocument", sender: url)
+    }
+    
     func createDocument() {
         let documentName = "Document \(arc4random()).note"
         
@@ -287,6 +309,10 @@ class DocumentListViewController: UICollectionViewController {
                             
                             OperationQueue.main.addOperation { () -> Void in
                                 self.availableFiles.append(ubiquitousDestinationURL)
+                                
+                                let path = ubiquitousDestinationURL.path
+                                self.openDocumentWithPath(path: path)
+                                
                                 self.collectionView?.reloadData()
                             }
                         }catch let error as NSError {
@@ -297,6 +323,10 @@ class DocumentListViewController: UICollectionViewController {
             } else {
                 self.availableFiles.append(documentDestinationURL!)
                 self.collectionView?.reloadData()
+                
+                if let path = documentDestinationURL?.path {
+                    self.openDocumentWithPath(path: path)
+                }
             }
         }
     }
