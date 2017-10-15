@@ -321,7 +321,7 @@
                     <connections>
                         <outlet property="attachmentsCollectionView" destination="jET-qh-t5y" id="OV1-hm-YA0"/>
                         <outlet property="textView" destination="aP4-xj-SjG" id="JWU-BO-Umy"/>
-                        <segue destination="AOD-MW-G6A" kind="popoverPresentation" popoverAnchorView="2ma-vS-FOr" id="IOx-a0-YrC">
+                        <segue destination="AOD-MW-G6A" kind="popoverPresentation" identifier="ShowImageAttachment" popoverAnchorView="2ma-vS-FOr" id="IOx-a0-YrC">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
                     </connections>

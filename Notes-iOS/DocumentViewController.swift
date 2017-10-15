@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MobileCoreServices
 
 protocol AttachmentViewer: NSObjectProtocol {
     var attachmentFile : FileWrapper? { get set }
@@ -213,6 +214,29 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let attachmentViewer = segue.destination as? AttachmentViewer {
+            attachmentViewer.document = self.document!
+            
+            if let cell = sender as? UICollectionViewCell,
+                let indexPath = self.attachmentsCollectionView?.indexPath(for: cell),
+                let attachment = self.document?.attachFiles?[indexPath.row] {
+                attachmentViewer.attachmentFile = attachment
+            } else {
+                // no attachment
+            }
+            
+            // don't close the document while show the attachment
+            self.shouldCloseOnDisappear = false
+            
+            if let popover = segue.destination.popoverPresentationController {
+                popover.delegate = self
+                popover.sourceView = self.attachmentsCollectionView
+                popover.sourceRect = self.attachmentsCollectionView.bounds
+            }
+        }
+    }
 }
 
 extension DocumentViewController : UICollectionViewDataSource, UICollectionViewDelegate {
@@ -258,6 +282,10 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        /*if self.isEditingAttachments {
+            return
+        }*/
+        
         guard let selectedCell = collectionView.cellForItem(at: indexPath) else {
             return
         }
@@ -265,6 +293,22 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
         let totalNumberOfCells = collectionView.numberOfItems(inSection: indexPath.section)
         if (indexPath.row == totalNumberOfCells - 1) {
             addAttachment(sourceView: selectedCell)
+        } else {
+            guard let attachment = self.document?.attachFiles![indexPath.row] else {
+                NSLog("No attachment for this cell!")
+                return
+            }
+            
+            let segueName : String?
+            if attachment.conformsToType(type: kUTTypeImage) {
+                segueName = "ShowImageAttachment"
+            } else {
+                segueName = nil
+            }
+            
+            if let theSegue = segueName {
+                self.performSegue(withIdentifier: theSegue, sender: selectedCell)
+            }
         }
     }
 }
@@ -290,4 +334,23 @@ extension DocumentViewController: UIImagePickerControllerDelegate, UINavigationC
     /*func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }*/
+}
+
+extension DocumentViewController: UIPopoverPresentationControllerDelegate {
+    func presentationController(_ controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+        let presentedViewController = controller.presentedViewController
+        if style == UIModalPresentationStyle.fullScreen && controller is UIPopoverPresentationController {
+            let navigationController = UINavigationController(rootViewController: controller.presentedViewController)
+            
+            let closeButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(DocumentViewController.dismissModalView))
+            presentedViewController.navigationItem.rightBarButtonItem = closeButton
+            return navigationController
+        } else {
+            return presentedViewController
+        }
+    }
+    
+    func dismissModalView() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
