@@ -56,6 +56,21 @@ class Document: UIDocument {
             self.documentFileWrapper.removeFileWrapper(oldTextFileWrapper)
         }
         
+        
+        let thumnailImageData = self.iconImageDataWithSize(size: CGSize(width: 512, height: 512))
+        let thumnailWrapper = FileWrapper(regularFileWithContents: thumnailImageData!)
+        let quicklookPreview = FileWrapper(regularFileWithContents: textRTFData)
+        let quickLookFolderFileWrapper = FileWrapper(directoryWithFileWrappers: [
+            NoteDocumentFileNames.QuickLookTextFile.rawValue: quicklookPreview,
+            NoteDocumentFileNames.QuickLookThumbnail.rawValue: thumnailWrapper
+            ])
+        quickLookFolderFileWrapper.preferredFilename = NoteDocumentFileNames.QuickLookDirectory.rawValue
+        if let oldQuickLookFolder = self.documentFileWrapper.fileWrappers?[NoteDocumentFileNames.QuickLookDirectory.rawValue] {
+            self.documentFileWrapper.removeFileWrapper(oldQuickLookFolder)
+        }
+        
+        self.documentFileWrapper.addFileWrapper(quickLookFolderFileWrapper)
+
         self.documentFileWrapper.addRegularFile(withContents: textRTFData, preferredFilename: NoteDocumentFileNames.TextFile.rawValue)
         
         return self.documentFileWrapper
@@ -114,5 +129,41 @@ class Document: UIDocument {
         attachmentsDirectoryWrapper?.addFileWrapper(newAttachment)
         self.updateChangeCount(UIDocumentChangeKind.done)
         return newAttachment
+    }
+    
+    func iconImageDataWithSize(size: CGSize) -> Data? {
+        UIGraphicsBeginImageContext(size)
+        defer {
+            UIGraphicsEndPDFContext()
+        }
+        
+        let entireImageRect = CGRect(origin: CGPoint.zero, size: size)
+        let backgroundRect = UIBezierPath(rect: entireImageRect)
+        UIColor.white.setFill()
+        backgroundRect.fill()
+        if self.attachFiles!.count >= 1 {
+            let attachmentImage = self.attachFiles?[0].thumbnailImage()
+            var firstHalf : CGRect = CGRect.zero
+            var secondHalf : CGRect = CGRect.zero
+            (firstHalf, secondHalf) = entireImageRect.divided(atDistance: entireImageRect.size.height / 2.0, from: CGRectEdge.minYEdge)
+            self.text.draw(in: firstHalf)
+            attachmentImage?.draw(in: secondHalf)
+        } else {
+            self.text.draw(in: entireImageRect)
+        }
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        return UIImagePNGRepresentation(image!)
+    }
+    
+    func addAttachmentWithData(data: Data, name: String) throws {
+        guard attachmentsDirectoryWrapper != nil else {
+            throw err(code: .CannotAccessAttachments)
+        }
+        
+        let newAttachment = FileWrapper(regularFileWithContents: data)
+        newAttachment.preferredFilename = name
+        attachmentsDirectoryWrapper?.addFileWrapper(newAttachment)
+        self.updateChangeCount(.done)
     }
 }

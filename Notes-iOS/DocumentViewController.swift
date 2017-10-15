@@ -7,11 +7,25 @@
 //
 
 import UIKit
+import AVFoundation
+
+protocol AttachmentViewer: NSObjectProtocol {
+    var attachmentFile : FileWrapper? { get set }
+    var document : Document? { get set }
+}
+
+class AttachmentCell : UICollectionViewCell {
+    @IBOutlet weak var imageView : UIImageView?
+    @IBOutlet weak var extensionLabel : UILabel?
+}
 
 class DocumentViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var attachmentsCollectionView : UICollectionView!
     
-    private var document : Document?
+    private var shouldCloseOnDisappear = true
+    var stateChangedObserver : AnyObject?
+    var document : Document?
     var documentURL : URL? {
         didSet {
             if let url = documentURL {
@@ -19,7 +33,123 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
-
+    
+    func documentStateChanged() {
+        if let document = self.document, document.documentState.contains(UIDocumentState.inConflict) {
+            guard var conflictedVersions = NSFileVersion.unresolvedConflictVersionsOfItem(at: document.fileURL) else {
+                fatalError("The document is in conflict, but no conflicting version were found. This should not happen.")
+            }
+            
+            let currentVersion = NSFileVersion.currentVersionOfItem(at: document.fileURL)!
+            conflictedVersions += [currentVersion]
+            
+            let title = "Resolve conflicts"
+            let message = "Choose a version of this document to keep."
+            let picker = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.actionSheet)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            dateFormatter.timeStyle = .short
+            
+            let cancelAndClose = { (action: UIAlertAction) -> Void in
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+            for version in conflictedVersions {
+                let description = "Edited on \(version.localizedNameOfSavingComputer!) at " +
+                "\(dateFormatter.string(from: version.modificationDate!))"
+                
+                let action = UIAlertAction(title: description, style: UIAlertActionStyle.default, handler: {
+                    (action) -> Void in
+                    
+                    do {
+                        if version != currentVersion {
+                            try version.replaceItem(at: document.fileURL, options: NSFileVersion.ReplacingOptions.byMoving)
+                            try NSFileVersion.removeOtherVersionsOfItem(at: document.fileURL)
+                        }
+                        
+                        document.revert(toContentsOf: document.fileURL, completionHandler: { (success) -> Void in
+                            self.textView.attributedText = document.text
+                            self.attachmentsCollectionView?.reloadData()
+                        })
+                        
+                        for version in conflictedVersions {
+                            version.isResolved = true
+                        }
+                    } catch let error as NSError {
+                        let errorView = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        errorView.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.cancel, handler: cancelAndClose))
+                        
+                        self.shouldCloseOnDisappear = false
+                        self.present(errorView, animated: true, completion: nil)
+                    }
+                })
+                
+                picker.addAction(action)
+            }
+            
+            picker.addAction(UIAlertAction(title: "Choose Later", style: UIAlertActionStyle.cancel, handler: cancelAndClose))
+            self.shouldCloseOnDisappear = false
+            self.present(picker, animated: true, completion: nil)
+        } else {
+            self.attachmentsCollectionView?.reloadData()
+        }
+    }
+    
+    func addAttachment(sourceView: UIView) {
+        let actionSheet = UIAlertController(title: "Add attachment", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+            var handler : (_ action: UIAlertAction) -> Void
+            switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+            case .authorized:
+                fallthrough
+            case .notDetermined:
+                handler = { (action) in
+                    self.addPhoto()
+                }
+            default:
+                handler = { (action) in
+                    let title = "Camera access required"
+                    let message = "Go to Settings to grant permission to access the camera."
+                    let cancelButton = "Cancel"
+                    let settingsButton = "Settings"
+                    
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    
+                    alert.addAction(UIAlertAction(title: cancelButton, style: .cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: settingsButton, style: .default, handler: { (action) in
+                        if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                        }
+                    }))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
+            actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: handler))
+        }
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
+            actionSheet.modalPresentationStyle = .popover
+            actionSheet.popoverPresentationController?.sourceView = sourceView
+            actionSheet.popoverPresentationController?.sourceRect = sourceView.bounds
+        }
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func addPhoto() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.delegate = self
+        self.shouldCloseOnDisappear = false
+        self.present(picker, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +167,16 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
             document.open(completionHandler: { (success) -> Void in
                 if success == true {
                     self.textView?.attributedText = document.text
+                    
+                    // register state changer notify
+                    self.stateChangedObserver = NotificationCenter.default.addObserver(
+                        forName: NSNotification.Name.UIDocumentStateChanged,
+                        object: document,
+                        queue: nil, using: { (notification) -> Void in
+                            self.documentStateChanged()
+                    })
+                    
+                    self.documentStateChanged()
                 } else {
                     let alertTitle = "Error"
                     let alertMessage = "Failed to open document"
@@ -50,6 +190,9 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
                 }
             })
         }
+        
+        self.shouldCloseOnDisappear = true
+        self.attachmentsCollectionView?.reloadData()
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -58,6 +201,11 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        if shouldCloseOnDisappear == false {
+            return
+        }
+        
+        self.stateChangedObserver = nil
         self.document?.close(completionHandler: nil)
     }
 
@@ -65,16 +213,81 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension DocumentViewController : UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.document!.documentState.contains(.closed) {
+            return 0
+        }
+        
+        guard let attachments = self.document?.attachFiles else {
+            return 0
+        }
+        
+        return attachments.count + 1
     }
-    */
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let totalNumberOfCells = collectionView.numberOfItems(inSection: indexPath.section)
+        let isAddCell = (indexPath.row == (totalNumberOfCells - 1))
+        let cell : UICollectionViewCell
+        
+        if isAddCell {
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddAttachmentCell", for: indexPath)
+        } else {
+            let attachmentCell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "AttachmentCell", for: indexPath) as! AttachmentCell
+            
+            let attachment = self.document?.attachFiles?[indexPath.row]
+            var image = attachment?.thumbnailImage()
+            
+            if image == nil {
+                image = UIImage(named: "File")
+                
+                attachmentCell.extensionLabel?.text = attachment?.fileExtension?.uppercased()
+            } else {
+                attachmentCell.extensionLabel?.text = nil
+            }
+            
+            attachmentCell.imageView?.image = image
+            cell = attachmentCell
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedCell = collectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        
+        let totalNumberOfCells = collectionView.numberOfItems(inSection: indexPath.section)
+        if (indexPath.row == totalNumberOfCells - 1) {
+            addAttachment(sourceView: selectedCell)
+        }
+    }
+}
 
+extension DocumentViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        do {
+            if let image = (info[UIImagePickerControllerEditedImage]
+               ?? info[UIImagePickerControllerOriginalImage]) as? UIImage,
+               let imageData = UIImageJPEGRepresentation(image, 0.8) {
+                try self.document?.addAttachmentWithData(data: imageData, name: "Image \(arc4random()).jpg")
+                self.dismiss(animated: true, completion: nil)
+                self.attachmentsCollectionView?.reloadData()
+            } else {
+                throw err(code: .CannotSaveAttachment)
+            }
+        } catch let error as NSError {
+            NSLog("Error adding attachment: \(error)")
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    /*func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }*/
 }

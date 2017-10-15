@@ -9,7 +9,10 @@
 import Cocoa
 
 class AttachmentCell: NSCollectionViewItem {
-
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var extensionLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
