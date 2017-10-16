@@ -361,12 +361,26 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oLc-2m-xp7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKm-p2-ap8">
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="r7K-U7-zkJ">
+                                        <connections>
+                                            <action selector="shareImage:" destination="AOD-MW-G6A" id="a6O-LJ-XSP"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="GKm-p2-ap8" firstAttribute="leading" secondItem="274-f3-gwh" secondAttribute="leading" id="5NU-iL-N4B"/>
+                            <constraint firstAttribute="trailing" secondItem="GKm-p2-ap8" secondAttribute="trailing" id="D6u-4Z-B1F"/>
+                            <constraint firstItem="YUC-wR-M6C" firstAttribute="top" secondItem="GKm-p2-ap8" secondAttribute="bottom" id="FM2-gM-9xT"/>
                             <constraint firstItem="oLc-2m-xp7" firstAttribute="top" secondItem="274-f3-gwh" secondAttribute="top" id="Nfg-kS-joa"/>
                             <constraint firstAttribute="trailing" secondItem="oLc-2m-xp7" secondAttribute="trailing" id="c7H-1b-ktm"/>
                             <constraint firstItem="YUC-wR-M6C" firstAttribute="top" secondItem="oLc-2m-xp7" secondAttribute="bottom" id="e4V-31-ZZt"/>
+                            <constraint firstItem="GKm-p2-ap8" firstAttribute="leading" secondItem="oLc-2m-xp7" secondAttribute="trailing" constant="-414" id="mAR-Di-tsk"/>
                             <constraint firstItem="oLc-2m-xp7" firstAttribute="leading" secondItem="274-f3-gwh" secondAttribute="leading" id="nub-fn-IEk"/>
                         </constraints>
                     </view>

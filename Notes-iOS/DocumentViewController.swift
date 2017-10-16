@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import MobileCoreServices
+import CoreSpotlight
 
 protocol AttachmentViewer: NSObjectProtocol {
     var attachmentFile : FileWrapper? { get set }
@@ -52,6 +53,12 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
             if let url = documentURL {
                 self.document = Document(fileURL: url)
             }
+        }
+    }
+    
+    override func restoreUserActivityState(_ activity: NSUserActivity) {
+        if let url = activity.userInfo?[NSUserActivityDocumentURLKey] as? URL {
+            self.performSegue(withIdentifier: "ShowDocument", sender: url)
         }
     }
     
@@ -188,6 +195,16 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
             document.open(completionHandler: { (success) -> Void in
                 if success == true {
                     self.textView?.attributedText = document.text
+                    self.attachmentsCollectionView?.reloadData()
+                    
+                    document.userActivity?.title = document.localizedName
+                    let contentAttributeSet = CSSearchableItemAttributeSet(itemContentType: document.fileType!)
+                    contentAttributeSet.title = document.localizedName
+                    contentAttributeSet.contentDescription = document.text.string
+                    document.userActivity?.contentAttributeSet = contentAttributeSet
+                    document.userActivity?.isEligibleForSearch = true
+                    
+                    document.userActivity?.becomeCurrent()
                     
                     // register state changer notify
                     self.stateChangedObserver = NotificationCenter.default.addObserver(

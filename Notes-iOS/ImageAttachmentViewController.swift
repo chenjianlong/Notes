@@ -13,6 +13,21 @@ class ImageAttachmentViewController: UIViewController, AttachmentViewer {
     var attachmentFile: FileWrapper?
     var document: Document?
     
+    @IBAction func shareImage(_ sender: UIBarButtonItem) {
+        guard let image = self.imageView?.image else {
+            return
+        }
+        
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        
+        if UIApplication.shared.keyWindow?.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClass.regular {
+            activityController.modalPresentationStyle = .popover
+            activityController.popoverPresentationController?.barButtonItem = sender
+        }
+        
+        self.present( activityController, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
