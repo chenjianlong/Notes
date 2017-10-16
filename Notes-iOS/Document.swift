@@ -166,4 +166,14 @@ class Document: UIDocument {
         attachmentsDirectoryWrapper?.addFileWrapper(newAttachment)
         self.updateChangeCount(.done)
     }
+    
+    func deleteAttachment(attachment: FileWrapper) throws {
+        guard attachmentsDirectoryWrapper != nil else {
+            throw err(code: .CannotAccessAttachments)
+        }
+        
+        attachmentsDirectoryWrapper?.removeFileWrapper(attachment)
+        self.updateChangeCount(.done)
+    }
 }
+

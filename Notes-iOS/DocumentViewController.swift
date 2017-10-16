@@ -15,15 +15,35 @@ protocol AttachmentViewer: NSObjectProtocol {
     var document : Document? { get set }
 }
 
+
+protocol AttachmentCellDelegate {
+    func attachmentCellWasDeleted(cell: AttachmentCell)
+}
+
 class AttachmentCell : UICollectionViewCell {
     @IBOutlet weak var imageView : UIImageView?
     @IBOutlet weak var extensionLabel : UILabel?
+    
+    @IBOutlet weak var deleteButton : UIButton?
+    
+    var editMode = false {
+        didSet {
+            // transparency while not on edit mode
+            deleteButton?.alpha = editMode ? 1 : 0
+        }
+    }
+    
+    var delegate : AttachmentCellDelegate?
+    @IBAction func delete() {
+        self.delegate?.attachmentCellWasDeleted(cell: self)
+    }
 }
 
 class DocumentViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var attachmentsCollectionView : UICollectionView!
     
+    var isEditingAttachments = false
     private var shouldCloseOnDisappear = true
     var stateChangedObserver : AnyObject?
     var document : Document?
@@ -201,6 +221,39 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         document?.updateChangeCount(.done)
     }
     
+    func beginEditMode() {
+        self.isEditingAttachments = true
+        UIView.animate(withDuration: 0.1, animations: {
+            () -> Void in
+            for cell in self.attachmentsCollectionView!.visibleCells {
+                if let attachmentCell = cell as? AttachmentCell {
+                    attachmentCell.editMode = true
+                } else {
+                    cell.alpha = 0
+                }
+            }
+        })
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(DocumentViewController.endEditMode))
+        self.navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    func endEditMode() {
+        self.isEditingAttachments = false
+        UIView.animate(withDuration: 0.1, animations: {
+            () -> Void in
+            for cell in self.attachmentsCollectionView!.visibleCells {
+                if let attachmentCell = cell as? AttachmentCell {
+                    attachmentCell.editMode = false
+                } else {
+                    cell.alpha = 1
+                }
+            }
+        })
+        
+        self.navigationItem.rightBarButtonItem = nil
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         if shouldCloseOnDisappear == false {
             return
@@ -275,6 +328,12 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
             }
             
             attachmentCell.imageView?.image = image
+            attachmentCell.editMode = self.isEditingAttachments
+            
+            let longPressGestur = UILongPressGestureRecognizer(target: self, action: #selector(DocumentViewController.beginEditMode))
+            attachmentCell.gestureRecognizers = [longPressGestur]
+            attachmentCell.delegate = self
+            
             cell = attachmentCell
         }
         
@@ -282,9 +341,9 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        /*if self.isEditingAttachments {
+        if self.isEditingAttachments {
             return
-        }*/
+        }
         
         guard let selectedCell = collectionView.cellForItem(at: indexPath) else {
             return
@@ -354,3 +413,25 @@ extension DocumentViewController: UIPopoverPresentationControllerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+
+extension DocumentViewController: AttachmentCellDelegate {
+    func attachmentCellWasDeleted(cell: AttachmentCell) {
+        guard let indexPath = self.attachmentsCollectionView?.indexPath(for: cell) else {
+            return
+        }
+        
+        guard let attachment = self.document?.attachFiles?[indexPath.row] else {
+            return
+        }
+        
+        do {
+            try self.document?.deleteAttachment(attachment: attachment)
+            self.attachmentsCollectionView?.deleteItems(at: [indexPath])
+            self.endEditMode()
+        } catch let error as NSError {
+            NSLog("Failed to delete attachment: \(error)")
+        }
+    }
+}
+

@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -192,6 +193,16 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIs-X8-uGM">
+                                                                    <rect key="frame" x="64" y="0.0" width="24" height="24"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="pIs-X8-uGM" secondAttribute="height" multiplier="1:1" id="T8H-Hh-vFq"/>
+                                                                    </constraints>
+                                                                    <state key="normal" image="Delete"/>
+                                                                    <connections>
+                                                                        <action selector="delete" destination="w3X-4i-Df4" eventType="touchUpInside" id="1dR-YI-JsJ"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                         </view>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,12 +210,17 @@
                                                             <constraint firstAttribute="trailing" secondItem="HbD-Cm-AUB" secondAttribute="trailing" id="1De-dX-J9u"/>
                                                             <constraint firstAttribute="bottom" secondItem="gXd-KB-6to" secondAttribute="bottom" id="FIb-gu-5Vx"/>
                                                             <constraint firstItem="gXd-KB-6to" firstAttribute="leading" secondItem="w3X-4i-Df4" secondAttribute="leading" id="G9Y-Pq-Zyp"/>
+                                                            <constraint firstItem="pIs-X8-uGM" firstAttribute="top" secondItem="w3X-4i-Df4" secondAttribute="top" id="L1K-0V-06x"/>
+                                                            <constraint firstAttribute="trailing" secondItem="pIs-X8-uGM" secondAttribute="trailing" id="SLG-kY-TW3"/>
+                                                            <constraint firstItem="pIs-X8-uGM" firstAttribute="top" secondItem="w3X-4i-Df4" secondAttribute="top" id="UdM-Ri-RJF"/>
+                                                            <constraint firstAttribute="trailing" secondItem="pIs-X8-uGM" secondAttribute="trailing" id="YRJ-fZ-Hw7"/>
                                                             <constraint firstAttribute="bottom" secondItem="HbD-Cm-AUB" secondAttribute="bottom" id="aGh-s7-Uci"/>
                                                             <constraint firstAttribute="trailing" secondItem="gXd-KB-6to" secondAttribute="trailing" id="bJ6-n3-Shv"/>
                                                             <constraint firstItem="HbD-Cm-AUB" firstAttribute="top" secondItem="w3X-4i-Df4" secondAttribute="top" id="dFC-eZ-PpN"/>
                                                             <constraint firstItem="HbD-Cm-AUB" firstAttribute="leading" secondItem="w3X-4i-Df4" secondAttribute="leading" id="fYh-jk-dx8"/>
                                                         </constraints>
                                                         <connections>
+                                                            <outlet property="deleteButton" destination="pIs-X8-uGM" id="Bmz-0z-uho"/>
                                                             <outlet property="extensionLabel" destination="gXd-KB-6to" id="lN2-12-KwV"/>
                                                             <outlet property="imageView" destination="HbD-Cm-AUB" id="ygP-45-ma9"/>
                                                         </connections>
