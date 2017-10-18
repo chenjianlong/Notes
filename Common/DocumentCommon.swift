@@ -14,7 +14,7 @@ func err(code: ErrorCode, _ userInfo: [NSObject: AnyObject]? = nil) -> NSError
 {
     return NSError(domain: ErrorDomain,
                    code: code.rawValue,
-                   userInfo: userInfo)
+                   userInfo: userInfo as? [String : Any])
 }
 
 enum NoteDocumentFileNames: String {

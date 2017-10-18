@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSpotlight
 
 class DocumentListViewController: UICollectionViewController {
     var availableFiles: [URL] = []
@@ -174,6 +175,17 @@ class DocumentListViewController: UICollectionViewController {
             } catch let error as NSError {
                 print("Error downloading item! \(error)")
             }
+        }
+    }
+    
+    override func restoreUserActivityState(_ activity: NSUserActivity) {
+        if let url = activity.userInfo?[NSUserActivityDocumentURLKey] as? URL {
+            self.performSegue(withIdentifier: "ShowDocument", sender: url)
+        }
+        
+        if let searchableItemIdentifier = activity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+            let url = URL(string: searchableItemIdentifier) {
+            self.performSegue(withIdentifier: "ShowDocument", sender: url)
         }
     }
     

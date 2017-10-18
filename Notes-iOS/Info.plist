@@ -17,15 +17,12 @@
 			<array/>
 			<key>CFBundleTypeName</key>
 			<string>Note</string>
-			<key>CFBundleTypeOSTypes</key>
-			<dict>
-				<key>NSUbiquitousDocumentUserActivityType</key>
-				<string>au.com.secretlab.Note.editing</string>
-			</dict>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>au.com.secretlab.Note</string>
 			</array>
+			<key>NSUbiquitousDocumentUserActivityType</key>
+			<string>au.com.secretlab.Note.editing</string>
 		</dict>
 		<dict>
 			<key>CFBundleTypeIconFiles</key>
@@ -48,6 +45,17 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>notes</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>

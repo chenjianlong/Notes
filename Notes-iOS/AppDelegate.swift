@@ -31,6 +31,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return false
     }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        let path = url.path
+        if url.scheme == "notes"  {
+            if let navigationController = self.window?.rootViewController as? UINavigationController {
+                navigationController.popToRootViewController(animated: false)
+                (navigationController.topViewController as? DocumentListViewController)?.openDocumentWithPath(path: path)
+            }
+                
+            return true
+        }
+            
+        return false
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

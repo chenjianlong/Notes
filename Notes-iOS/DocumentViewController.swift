@@ -56,12 +56,6 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    override func restoreUserActivityState(_ activity: NSUserActivity) {
-        if let url = activity.userInfo?[NSUserActivityDocumentURLKey] as? URL {
-            self.performSegue(withIdentifier: "ShowDocument", sender: url)
-        }
-    }
-    
     func documentStateChanged() {
         if let document = self.document, document.documentState.contains(UIDocumentState.inConflict) {
             guard var conflictedVersions = NSFileVersion.unresolvedConflictVersionsOfItem(at: document.fileURL) else {
