@@ -340,6 +340,9 @@
                         <segue destination="AOD-MW-G6A" kind="popoverPresentation" identifier="ShowImageAttachment" popoverAnchorView="2ma-vS-FOr" id="IOx-a0-YrC">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="LNB-Si-BZy" kind="popoverPresentation" identifier="ShowLocationAttachment" popoverAnchorView="2ma-vS-FOr" id="rHR-xm-OCQ">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWt-K0-xwy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -392,9 +395,59 @@
             </objects>
             <point key="canvasLocation" x="1689.8550724637682" y="157.33695652173915"/>
         </scene>
+        <!--Location Attachment View Controller-->
+        <scene sceneID="lwy-42-gSe">
+            <objects>
+                <viewController id="LNB-Si-BZy" customClass="LocationAttachmentViewController" customModule="Notes_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3NM-bu-Fbu"/>
+                        <viewControllerLayoutGuide type="bottom" id="5UM-n8-FoS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JI3-ww-NMG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z8W-OJ-RiE">
+                                <rect key="frame" x="0.0" y="40" width="414" height="696"/>
+                                <connections>
+                                    <outlet property="delegate" destination="LNB-Si-BZy" id="8wd-hz-iPJ"/>
+                                </connections>
+                            </mapView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKA-c8-QBr">
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem image="Current Location" id="voG-Br-6DE">
+                                        <connections>
+                                            <action selector="showCurrentLocation:" destination="LNB-Si-BZy" id="LIa-Mt-pvj"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5UM-n8-FoS" firstAttribute="top" secondItem="XKA-c8-QBr" secondAttribute="bottom" id="3wK-PL-Xbc"/>
+                            <constraint firstAttribute="trailing" secondItem="Z8W-OJ-RiE" secondAttribute="trailing" id="47k-Dy-RNZ"/>
+                            <constraint firstAttribute="trailing" secondItem="XKA-c8-QBr" secondAttribute="trailing" id="Kam-Fy-czK"/>
+                            <constraint firstItem="5UM-n8-FoS" firstAttribute="top" secondItem="Z8W-OJ-RiE" secondAttribute="bottom" id="QnI-8t-jOL"/>
+                            <constraint firstItem="Z8W-OJ-RiE" firstAttribute="top" secondItem="3NM-bu-Fbu" secondAttribute="bottom" constant="20" id="YFx-BE-V9S"/>
+                            <constraint firstItem="XKA-c8-QBr" firstAttribute="leading" secondItem="JI3-ww-NMG" secondAttribute="leading" id="tkU-Gy-cYk"/>
+                            <constraint firstItem="Z8W-OJ-RiE" firstAttribute="leading" secondItem="JI3-ww-NMG" secondAttribute="leading" id="zcE-Dk-d7w"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="Z8W-OJ-RiE" id="D18-YU-Fd8"/>
+                        <outlet property="showCurrentLocationButton" destination="voG-Br-6DE" id="ecO-Xs-8g5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bCz-Re-xXk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2417.3913043478265" y="160.59782608695653"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AddAttachment" width="25" height="26"/>
+        <image name="Current Location" width="24" height="24"/>
         <image name="Delete" width="22" height="24"/>
     </resources>
 </document>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		613ED21D1F97A37400788D54 /* LocationAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613ED21C1F97A37400788D54 /* LocationAttachmentViewController.swift */; };
 		615AB1541F51C3B0005839AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AB1531F51C3B0005839AF /* AppDelegate.swift */; };
 		615AB1561F51C3B0005839AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AB1551F51C3B0005839AF /* ViewController.swift */; };
 		615AB1581F51C3B0005839AF /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AB1571F51C3B0005839AF /* Document.swift */; };
@@ -100,6 +101,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		613ED21C1F97A37400788D54 /* LocationAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAttachmentViewController.swift; sourceTree = "<group>"; };
 		615AB1501F51C3B0005839AF /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		615AB1531F51C3B0005839AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615AB1551F51C3B0005839AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				61B5A83B1F93776100CB5451 /* ImageAttachmentViewController.swift */,
 				615AB1921F5F66DD005839AF /* Main.storyboard */,
 				615AB1BA1F60C436005839AF /* Document.swift */,
+				613ED21C1F97A37400788D54 /* LocationAttachmentViewController.swift */,
 				615AB1951F5F66DD005839AF /* Assets.xcassets */,
 				615AB1971F5F66DD005839AF /* LaunchScreen.storyboard */,
 				615AB19A1F5F66DE005839AF /* Info.plist */,
@@ -685,6 +688,7 @@
 			files = (
 				61B222781F80701800AF8477 /* DocumentViewController.swift in Sources */,
 				615AB1911F5F66DD005839AF /* DocumentListViewController.swift in Sources */,
+				613ED21D1F97A37400788D54 /* LocationAttachmentViewController.swift in Sources */,
 				615AB18F1F5F66DD005839AF /* AppDelegate.swift in Sources */,
 				61B5A83C1F93776200CB5451 /* ImageAttachmentViewController.swift in Sources */,
 				615AB1BB1F60C436005839AF /* Document.swift in Sources */,

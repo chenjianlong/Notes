@@ -153,6 +153,10 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
             actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: handler))
         }
         
+        actionSheet.addAction(UIAlertAction(title: "Location", style: .default, handler: {
+            (action) -> Void in
+            self.addLocation()
+        }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
@@ -170,6 +174,10 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         picker.delegate = self
         self.shouldCloseOnDisappear = false
         self.present(picker, animated: true, completion: nil)
+    }
+    
+    func addLocation() {
+        self.performSegue(withIdentifier: "ShowLocationAttachment", sender: nil)
     }
     
     override func viewDidLoad() {
@@ -372,6 +380,8 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
             let segueName : String?
             if attachment.conformsToType(type: kUTTypeImage) {
                 segueName = "ShowImageAttachment"
+            } else if attachment.conformsToType(type: kUTTypeJSON) {
+                segueName = "ShowLocationAttachment"
             } else {
                 segueName = nil
             }

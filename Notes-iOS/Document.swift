@@ -36,6 +36,10 @@ extension FileWrapper {
             return UIImage(data: attachmentContent)
         }
         
+        if self.conformsToType(type: kUTTypeJSON) {
+            return UIImage(named: "Location")
+        }
+        
         return nil
     }
 }

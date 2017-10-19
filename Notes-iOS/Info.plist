@@ -104,5 +104,7 @@
 		</dict>
 		<dict/>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We&apos;ll use your position to show where you are on the map</string>
 </dict>
 </plist>
