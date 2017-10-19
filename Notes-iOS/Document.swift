@@ -40,6 +40,10 @@ extension FileWrapper {
             return UIImage(named: "Location")
         }
         
+        if self.conformsToType(type: kUTTypeAudio) {
+            return UIImage(named: "Audio")
+        }
+        
         return nil
     }
 }

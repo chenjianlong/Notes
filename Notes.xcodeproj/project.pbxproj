@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		613ED21D1F97A37400788D54 /* LocationAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613ED21C1F97A37400788D54 /* LocationAttachmentViewController.swift */; };
+		613ED21F1F98F54500788D54 /* AudioAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613ED21E1F98F54500788D54 /* AudioAttachmentViewController.swift */; };
 		615AB1541F51C3B0005839AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AB1531F51C3B0005839AF /* AppDelegate.swift */; };
 		615AB1561F51C3B0005839AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AB1551F51C3B0005839AF /* ViewController.swift */; };
 		615AB1581F51C3B0005839AF /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615AB1571F51C3B0005839AF /* Document.swift */; };
@@ -102,6 +103,7 @@
 
 /* Begin PBXFileReference section */
 		613ED21C1F97A37400788D54 /* LocationAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAttachmentViewController.swift; sourceTree = "<group>"; };
+		613ED21E1F98F54500788D54 /* AudioAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioAttachmentViewController.swift; sourceTree = "<group>"; };
 		615AB1501F51C3B0005839AF /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		615AB1531F51C3B0005839AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615AB1551F51C3B0005839AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				615AB18E1F5F66DD005839AF /* AppDelegate.swift */,
 				615AB1901F5F66DD005839AF /* DocumentListViewController.swift */,
 				61B222771F80701800AF8477 /* DocumentViewController.swift */,
+				613ED21E1F98F54500788D54 /* AudioAttachmentViewController.swift */,
 				61B5A83B1F93776100CB5451 /* ImageAttachmentViewController.swift */,
 				615AB1921F5F66DD005839AF /* Main.storyboard */,
 				615AB1BA1F60C436005839AF /* Document.swift */,
@@ -686,6 +689,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				613ED21F1F98F54500788D54 /* AudioAttachmentViewController.swift in Sources */,
 				61B222781F80701800AF8477 /* DocumentViewController.swift in Sources */,
 				615AB1911F5F66DD005839AF /* DocumentListViewController.swift in Sources */,
 				613ED21D1F97A37400788D54 /* LocationAttachmentViewController.swift in Sources */,

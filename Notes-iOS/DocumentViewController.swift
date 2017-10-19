@@ -157,6 +157,11 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
             (action) -> Void in
             self.addLocation()
         }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: {
+            (action) -> Void in
+            self.addAudio()
+        }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
@@ -178,6 +183,10 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     
     func addLocation() {
         self.performSegue(withIdentifier: "ShowLocationAttachment", sender: nil)
+    }
+    
+    func addAudio() {
+        self.performSegue(withIdentifier: "ShowAudioAttachment", sender: nil)
     }
     
     override func viewDidLoad() {
@@ -382,6 +391,8 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
                 segueName = "ShowImageAttachment"
             } else if attachment.conformsToType(type: kUTTypeJSON) {
                 segueName = "ShowLocationAttachment"
+            } else if attachment.conformsToType(type: kUTTypeAudio) {
+                segueName = "ShowAudioAttachment"
             } else {
                 segueName = nil
             }
