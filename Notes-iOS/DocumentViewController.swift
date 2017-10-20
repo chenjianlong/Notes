@@ -47,6 +47,7 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var attachmentsCollectionView : UICollectionView!
     
+    let speechSynthesizer = AVSpeechSynthesizer()
     var isEditingAttachments = false
     var shouldCloseOnDisappear = true
     var stateChangedObserver : AnyObject?
@@ -200,8 +201,16 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let menuController = UIMenuController.shared
+        let speakItem = UIMenuItem(title: "Speak", action: #selector(speakSelection))
+        menuController.menuItems = [speakItem]
+    }
+    
+    func speakSelection(sender: AnyObject) {
+        if let range = self.textView?.selectedTextRange, let selectedText = self.textView?.text(in: range) {
+            let utterance = AVSpeechUtterance(string: selectedText)
+            speechSynthesizer.speak(utterance)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
