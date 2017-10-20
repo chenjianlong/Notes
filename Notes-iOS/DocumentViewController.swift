@@ -11,6 +11,8 @@ import AVFoundation
 import MobileCoreServices
 import CoreSpotlight
 import AVKit
+import Contacts
+import ContactsUI
 
 protocol AttachmentViewer: NSObjectProtocol {
     var attachmentFile : FileWrapper? { get set }
@@ -46,7 +48,7 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var attachmentsCollectionView : UICollectionView!
     
     var isEditingAttachments = false
-    private var shouldCloseOnDisappear = true
+    var shouldCloseOnDisappear = true
     var stateChangedObserver : AnyObject?
     var document : Document?
     var documentURL : URL? {
@@ -162,6 +164,11 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         actionSheet.addAction(UIAlertAction(title: "Audio", style: .default, handler: {
             (action) -> Void in
             self.addAudio()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Contact", style: .default, handler: {
+            (action) -> Void in
+            self.addContact()
         }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
@@ -408,6 +415,19 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
                 })
                 
                 segueName = nil
+            } else if attachment.conformsToType(type: kUTTypeContact) {
+                do {
+                    if let data = attachment.regularFileContents, let contact = try CNContactVCardSerialization.contacts(with: data).first {
+                        let contactViewController = CNContactViewController(for: contact)
+                        let navigationController = UINavigationController(rootViewController: contactViewController)
+                        contactViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissModalView))
+                        self.present(navigationController, animated: true, completion: nil)
+                    }
+                } catch let error as NSError {
+                    NSLog("Error displaying contact: \(error)")
+                }
+                
+                segueName = nil
             } else {
                 // this attachment has not viewcontroller, show UIDocumentInteractionController
                 self.document?.URLForAttachment(attachment: attachment, completion: {
@@ -486,6 +506,28 @@ extension DocumentViewController: AttachmentCellDelegate {
             self.endEditMode()
         } catch let error as NSError {
             NSLog("Failed to delete attachment: \(error)")
+        }
+    }
+}
+
+extension DocumentViewController: CNContactPickerDelegate {
+    func addContact() {
+        let contactPicker = CNContactPickerViewController()
+        contactPicker.delegate = self
+        self.shouldCloseOnDisappear = false
+        self.present(contactPicker, animated: true, completion: nil)
+    }
+    
+    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+        do {
+            if let data = try? CNContactVCardSerialization.data(with: [contact]) {
+                let name = "\(contact.identifier)-\(contact.givenName)\(contact.familyName).vcf"
+                
+                try self.document?.addAttachmentWithData(data: data, name: name)
+                self.attachmentsCollectionView?.reloadData()
+            }
+        } catch let error as NSError {
+            NSLog("Failed to save contact: \(error)")
         }
     }
 }

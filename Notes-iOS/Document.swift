@@ -48,6 +48,10 @@ extension FileWrapper {
             return UIImage(named: "Video")
         }
         
+        if self.conformsToType(type: kUTTypeContact) {
+            return UIImage(named: "Contact")
+        }
+        
         return nil
     }
 }
