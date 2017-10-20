@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.092408"
+            timestampString = "530206937.012124"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.095664"
+            timestampString = "530206937.012391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.095936"
+            timestampString = "530206937.012514"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.096191"
+            timestampString = "530206937.012632"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.096405"
+            timestampString = "530206937.012748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "206"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.096626"
+            timestampString = "530206937.012854"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "223"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.096813"
+            timestampString = "530206937.012968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.097011"
+            timestampString = "530206937.013103"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.097245"
+            timestampString = "530206937.013183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.097502"
+            timestampString = "530206937.01327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.097684"
+            timestampString = "530206937.01338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "199"
             endingLineNumber = "199"
-            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -202,12 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.097896"
+            timestampString = "530206937.013458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "196"
             endingLineNumber = "196"
-            landmarkName = "restoreUserActivityState(_:)"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.098101"
+            timestampString = "530206937.013568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -234,12 +234,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.098294"
+            timestampString = "530206937.013667"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
             endingLineNumber = "194"
-            landmarkName = "restoreUserActivityState(_:)"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.153711"
+            timestampString = "530206937.013785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "addAudio()"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,27 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.100304"
+            timestampString = "530206937.015248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "235"
             endingLineNumber = "235"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Notes-iOS/DocumentListViewController.swift"
-            timestampString = "529952102.100551"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -297,12 +281,28 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.154852"
+            filePath = "Notes-iOS/DocumentListViewController.swift"
+            timestampString = "530206937.015335"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Notes-iOS/DocumentViewController.swift"
+            timestampString = "530206937.015469"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "DocumentViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.155584"
+            timestampString = "530206937.016496"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.1563"
+            timestampString = "530206937.017614"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "endEditMode()"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.157117"
+            timestampString = "530206937.018579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -358,15 +358,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.157847"
+            timestampString = "530206937.019528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "addAttachment(sourceView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -374,46 +374,46 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.158568"
+            timestampString = "530206937.020499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "addAttachment(sourceView:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Notes_iOS.DocumentViewController.addAttachment(sourceView: __ObjC.UIView) -&gt; ()"
                   moduleName = "Notes-iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chenjianlong/Desktop/Notes/Notes-iOS/DocumentViewController.swift"
-                  timestampString = "530116632.26535"
+                  timestampString = "530206026.881207"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "134"
-                  endingLineNumber = "134"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
                   offsetFromSymbolStart = "592">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #2 (__ObjC.UIAlertAction) -&gt; () in Notes_iOS.DocumentViewController.addAttachment(sourceView: __ObjC.UIView) -&gt; ()"
                   moduleName = "Notes-iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chenjianlong/Desktop/Notes/Notes-iOS/DocumentViewController.swift"
-                  timestampString = "530116632.269317"
+                  timestampString = "530206026.884041"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "135"
-                  endingLineNumber = "135"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
                   offsetFromSymbolStart = "24">
                </Location>
             </Locations>
@@ -422,46 +422,46 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.159302"
+            timestampString = "530206937.021473"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "addAttachment(sourceView:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Notes_iOS.DocumentViewController.addAttachment(sourceView: __ObjC.UIView) -&gt; ()"
                   moduleName = "Notes-iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chenjianlong/Desktop/Notes/Notes-iOS/DocumentViewController.swift"
-                  timestampString = "530116632.287188"
+                  timestampString = "530206026.893762"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "130"
-                  endingLineNumber = "130"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
                   offsetFromSymbolStart = "504">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (__ObjC.UIAlertAction) -&gt; () in Notes_iOS.DocumentViewController.addAttachment(sourceView: __ObjC.UIView) -&gt; ()"
                   moduleName = "Notes-iOS"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/chenjianlong/Desktop/Notes/Notes-iOS/DocumentViewController.swift"
-                  timestampString = "530116632.290442"
+                  timestampString = "530206026.896308"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "131"
-                  endingLineNumber = "131"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -470,15 +470,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.159998"
+            timestampString = "530206937.022477"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "addAttachment(sourceView:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Notes-iOS/DocumentViewController.swift"
+            timestampString = "530206937.023457"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "addAttachment(sourceView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,27 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.160728"
+            timestampString = "530206937.024448"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "addAttachment(sourceView:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.161469"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -518,15 +518,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.162181"
+            timestampString = "530206937.025452"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "addAttachment(sourceView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -538,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/Document.swift"
-            timestampString = "530121950.162884"
+            timestampString = "530206937.026543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "attachFiles"
             landmarkType = "24">
          </BreakpointContent>
@@ -554,11 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/Document.swift"
-            timestampString = "530121950.162976"
+            timestampString = "530206937.026673"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "attachmentsDirectoryWrapper"
             landmarkType = "24">
          </BreakpointContent>
@@ -570,7 +570,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.16305"
+            timestampString = "530206937.026763"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "documentURL"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Notes-iOS/DocumentViewController.swift"
+            timestampString = "530206937.027684"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
@@ -586,27 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.16377"
+            timestampString = "530206937.028692"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "documentURL"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.164479"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "DocumentViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -618,11 +618,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Notes-iOS/DocumentViewController.swift"
-            timestampString = "530121950.165199"
+            timestampString = "530206937.029669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -720,6 +720,70 @@
             startingLineNumber = "73"
             endingLineNumber = "73"
             landmarkName = "addAttachmentAndClose()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Notes-iOS/DocumentViewController.swift"
+            timestampString = "530206937.030848"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "addPhoto()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Notes-iOS/DocumentViewController.swift"
+            timestampString = "530206937.031787"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Notes-iOS/DocumentViewController.swift"
+            timestampString = "530206937.032705"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Notes-iOS/DocumentViewController.swift"
+            timestampString = "530207060.710699"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

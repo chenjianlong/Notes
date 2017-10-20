@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import MobileCoreServices
 import CoreSpotlight
+import AVKit
 
 protocol AttachmentViewer: NSObjectProtocol {
     var attachmentFile : FileWrapper? { get set }
@@ -176,6 +177,7 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     func addPhoto() {
         let picker = UIImagePickerController()
         picker.sourceType = .camera
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: UIImagePickerControllerSourceType.camera)!
         picker.delegate = self
         self.shouldCloseOnDisappear = false
         self.present(picker, animated: true, completion: nil)
@@ -393,7 +395,29 @@ extension DocumentViewController : UICollectionViewDataSource, UICollectionViewD
                 segueName = "ShowLocationAttachment"
             } else if attachment.conformsToType(type: kUTTypeAudio) {
                 segueName = "ShowAudioAttachment"
+            } else if attachment.conformsToType(type: kUTTypeMovie) {
+                self.document?.URLForAttachment(attachment: attachment, completion: {
+                    (url) -> Void in
+                    if let attachmentURL = url {
+                        let media = AVPlayerViewController()
+                        media.player = AVPlayer(url: attachmentURL)
+                        
+                        let _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                        self.present(media, animated: true, completion: nil)
+                    }
+                })
+                
+                segueName = nil
             } else {
+                // this attachment has not viewcontroller, show UIDocumentInteractionController
+                self.document?.URLForAttachment(attachment: attachment, completion: {
+                    (url) -> Void in
+                    if let attachmentURL = url {
+                        let documentInteraction = UIDocumentInteractionController(url: attachmentURL)
+                        documentInteraction.presentOptionsMenu(from: selectedCell.bounds, in: selectedCell, animated: true)
+                    }
+                })
+                
                 segueName = nil
             }
             
@@ -413,6 +437,9 @@ extension DocumentViewController: UIImagePickerControllerDelegate, UINavigationC
                 try self.document?.addAttachmentWithData(data: imageData, name: "Image \(arc4random()).jpg")
                 self.dismiss(animated: true, completion: nil)
                 self.attachmentsCollectionView?.reloadData()
+            } else if let mediaURL = (info[UIImagePickerControllerMediaURL]) as? URL {
+                try _ = self.document?.addAttachmentAtURL(url: mediaURL)
+                self.dismiss(animated: true, completion: nil)
             } else {
                 throw err(code: .CannotSaveAttachment)
             }
@@ -421,10 +448,6 @@ extension DocumentViewController: UIImagePickerControllerDelegate, UINavigationC
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    /*func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.dismiss(animated: true, completion: nil)
-    }*/
 }
 
 extension DocumentViewController: UIPopoverPresentationControllerDelegate {

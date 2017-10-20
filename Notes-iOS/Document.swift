@@ -44,6 +44,10 @@ extension FileWrapper {
             return UIImage(named: "Audio")
         }
         
+        if self.conformsToType(type: kUTTypeMovie) {
+            return UIImage(named: "Video")
+        }
+        
         return nil
     }
 }
@@ -182,6 +186,29 @@ class Document: UIDocument {
         
         attachmentsDirectoryWrapper?.removeFileWrapper(attachment)
         self.updateChangeCount(.done)
+    }
+    
+    func URLForAttachment(attachment: FileWrapper, completion: @escaping (URL?) -> Void) {
+        guard let attachments = self.attachFiles, attachments.contains(attachment) else {
+            completion(nil)
+            return
+        }
+        
+        guard let fileName = attachment.preferredFilename else {
+            completion(nil)
+            return
+        }
+        
+        self.autosave(completionHandler: {
+            (success) -> Void in
+            if success {
+                let attachmentURL = self.fileURL.appendingPathComponent(NoteDocumentFileNames.AttachmentDirectory.rawValue, isDirectory: true).appendingPathComponent(fileName)
+                completion(attachmentURL)
+            } else {
+                NSLog("Failed to autosave!")
+                completion(nil)
+            }
+        })
     }
 }
 
