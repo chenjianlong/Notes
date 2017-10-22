@@ -205,7 +205,7 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         let menuController = UIMenuController.shared
         let speakItem = UIMenuItem(title: "Speak", action: #selector(speakSelection))
         menuController.menuItems = [speakItem]
-        self.isEditing = false
+        self.isEditing = UserDefaults.standard.bool(forKey: "document_edit_on_open")
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
