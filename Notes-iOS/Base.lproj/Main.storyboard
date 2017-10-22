@@ -326,13 +326,66 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sdD-TF-XJh">
+                                <rect key="frame" x="0.0" y="612" width="414" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYm-Sl-X2D">
+                                        <rect key="frame" x="8" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="3vB-SN-XNZ"/>
+                                            <constraint firstAttribute="width" constant="80" id="LyQ-89-NK4"/>
+                                        </constraints>
+                                        <state key="normal" image="Location"/>
+                                        <connections>
+                                            <action selector="showFilteredImage:" destination="AOD-MW-G6A" eventType="touchUpInside" id="MLF-cp-W8q"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgQ-Hj-8hO">
+                                        <rect key="frame" x="326" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="ezP-LP-iib"/>
+                                            <constraint firstAttribute="width" constant="80" id="iDN-aW-tym"/>
+                                        </constraints>
+                                        <state key="normal" image="Location"/>
+                                        <connections>
+                                            <action selector="showFilteredImage:" destination="AOD-MW-G6A" eventType="touchUpInside" id="pae-6C-mM0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGU-82-uhc">
+                                        <rect key="frame" x="167" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="cYC-Cg-MBS"/>
+                                            <constraint firstAttribute="height" constant="80" id="dhW-fr-nu8"/>
+                                        </constraints>
+                                        <state key="normal" image="Location"/>
+                                        <connections>
+                                            <action selector="showFilteredImage:" destination="AOD-MW-G6A" eventType="touchUpInside" id="wV6-MP-WXC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nYm-Sl-X2D" firstAttribute="leading" secondItem="sdD-TF-XJh" secondAttribute="leadingMargin" id="6vU-yi-UDM"/>
+                                    <constraint firstItem="VGU-82-uhc" firstAttribute="centerX" secondItem="sdD-TF-XJh" secondAttribute="centerX" id="D7o-y1-wWS"/>
+                                    <constraint firstItem="lgQ-Hj-8hO" firstAttribute="top" secondItem="sdD-TF-XJh" secondAttribute="top" id="PtL-zN-cyr"/>
+                                    <constraint firstAttribute="bottom" secondItem="VGU-82-uhc" secondAttribute="bottom" id="TeS-QM-gM1"/>
+                                    <constraint firstItem="lgQ-Hj-8hO" firstAttribute="trailing" secondItem="sdD-TF-XJh" secondAttribute="trailingMargin" id="VQK-bP-2TM"/>
+                                    <constraint firstItem="VGU-82-uhc" firstAttribute="top" secondItem="sdD-TF-XJh" secondAttribute="top" id="Yuh-Uv-TeN"/>
+                                    <constraint firstAttribute="bottom" secondItem="lgQ-Hj-8hO" secondAttribute="bottom" id="aXa-Lz-m6G"/>
+                                    <constraint firstItem="nYm-Sl-X2D" firstAttribute="top" secondItem="sdD-TF-XJh" secondAttribute="top" id="tCq-X0-XVT"/>
+                                    <constraint firstAttribute="bottom" secondItem="nYm-Sl-X2D" secondAttribute="bottom" id="vcC-gF-5nw"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="GKm-p2-ap8" firstAttribute="leading" secondItem="274-f3-gwh" secondAttribute="leading" id="5NU-iL-N4B"/>
                             <constraint firstAttribute="trailing" secondItem="GKm-p2-ap8" secondAttribute="trailing" id="D6u-4Z-B1F"/>
                             <constraint firstItem="YUC-wR-M6C" firstAttribute="top" secondItem="GKm-p2-ap8" secondAttribute="bottom" id="FM2-gM-9xT"/>
+                            <constraint firstItem="GKm-p2-ap8" firstAttribute="top" secondItem="sdD-TF-XJh" secondAttribute="bottom" id="MrB-mC-AGO"/>
                             <constraint firstItem="oLc-2m-xp7" firstAttribute="top" secondItem="274-f3-gwh" secondAttribute="top" id="Nfg-kS-joa"/>
+                            <constraint firstAttribute="trailing" secondItem="sdD-TF-XJh" secondAttribute="trailing" id="OzF-4r-wGm"/>
+                            <constraint firstItem="sdD-TF-XJh" firstAttribute="leading" secondItem="274-f3-gwh" secondAttribute="leading" id="axw-Hu-fQ2"/>
                             <constraint firstAttribute="trailing" secondItem="oLc-2m-xp7" secondAttribute="trailing" id="c7H-1b-ktm"/>
                             <constraint firstItem="YUC-wR-M6C" firstAttribute="top" secondItem="oLc-2m-xp7" secondAttribute="bottom" id="e4V-31-ZZt"/>
                             <constraint firstItem="GKm-p2-ap8" firstAttribute="leading" secondItem="oLc-2m-xp7" secondAttribute="trailing" constant="-414" id="mAR-Di-tsk"/>
@@ -341,6 +394,9 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="oLc-2m-xp7" id="ztM-ia-L3o"/>
+                        <outletCollection property="filterButtons" destination="nYm-Sl-X2D" collectionClass="NSMutableArray" id="vOs-CJ-i0u"/>
+                        <outletCollection property="filterButtons" destination="VGU-82-uhc" collectionClass="NSMutableArray" id="1HG-ia-aQH"/>
+                        <outletCollection property="filterButtons" destination="lgQ-Hj-8hO" collectionClass="NSMutableArray" id="IzM-I0-zwp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V1E-po-1h1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -456,6 +512,7 @@
         <image name="AddAttachment" width="25" height="26"/>
         <image name="Current Location" width="24" height="24"/>
         <image name="Delete" width="22" height="24"/>
+        <image name="Location" width="88" height="88"/>
         <image name="Play" width="26" height="44"/>
         <image name="Record" width="44" height="44"/>
         <image name="Stop" width="31" height="31"/>
