@@ -13,6 +13,7 @@ import CoreSpotlight
 import AVKit
 import Contacts
 import ContactsUI
+import SafariServices
 
 protocol AttachmentViewer: NSObjectProtocol {
     var attachmentFile : FileWrapper? { get set }
@@ -204,6 +205,23 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         let menuController = UIMenuController.shared
         let speakItem = UIMenuItem(title: "Speak", action: #selector(speakSelection))
         menuController.menuItems = [speakItem]
+        self.isEditing = false
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.textView.isEditable = editing
+        if editing {
+            self.textView.becomeFirstResponder()
+        }
+        
+        updateBarItems()
+    }
+    
+    func updateBarItems() {
+        var rightButtonItems : [UIBarButtonItem] = []
+        rightButtonItems.append(self.editButtonItem)
+        self.navigationItem.rightBarButtonItems = rightButtonItems
     }
     
     func speakSelection(sender: AnyObject) {
@@ -335,6 +353,12 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
                 popover.sourceRect = self.attachmentsCollectionView.bounds
             }
         }
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        let safari = SFSafariViewController(url: URL)
+        self.present(safari, animated: true, completion: nil)
+        return false
     }
 }
 

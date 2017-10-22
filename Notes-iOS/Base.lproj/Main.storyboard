@@ -160,7 +160,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qgq-A4-WcB">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="254.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jET-qh-t5y">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
@@ -251,63 +251,12 @@
                                                     <outlet property="delegate" destination="qM4-Ir-2Md" id="Re2-YT-zeE"/>
                                                 </connections>
                                             </collectionView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aP4-xj-SjG">
-                                                <rect key="frame" x="0.0" y="87.999999999999986" width="414" height="166.66666666666663"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aP4-xj-SjG">
+                                                <rect key="frame" x="0.0" y="88" width="414" height="30"/>
                                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="0.81029929577464788" colorSpace="calibratedRGB"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Lorem ipsum dolor sit er elit lamet">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=",">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
-                                                            <font key="NSOriginalFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" consectetaur cillium adipisicing pecu">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=",">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
-                                                            <font key="NSOriginalFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=",">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
-                                                            <font key="NSOriginalFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content"> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident</string>
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=",">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
-                                                            <font key="NSOriginalFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content"> sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
+                                                <attributedString key="attributedText"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="qM4-Ir-2Md" id="0TX-3Q-8xu"/>
                                                 </connections>
