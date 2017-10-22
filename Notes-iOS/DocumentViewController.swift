@@ -61,6 +61,10 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    var undoButton : UIBarButtonItem?
+    var didUndoObserver : AnyObject?
+    var didRedoObserver : AnyObject?
+    
     func documentStateChanged() {
         if let document = self.document, document.documentState.contains(UIDocumentState.inConflict) {
             guard var conflictedVersions = NSFileVersion.unresolvedConflictVersionsOfItem(at: document.fileURL) else {
@@ -80,6 +84,13 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
             let cancelAndClose = { (action: UIAlertAction) -> Void in
                 self.navigationController?.popViewController(animated: true)
             }
+            
+            document.revert(toContentsOf: document.fileURL, completionHandler: {
+                (success) -> Void in
+                self.textView.attributedText = document.text
+                self.attachmentsCollectionView?.reloadData()
+                self.updateBarItems()
+            })
             
             for version in conflictedVersions {
                 let description = "Edited on \(version.localizedNameOfSavingComputer!) at " +
@@ -206,6 +217,14 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
         let speakItem = UIMenuItem(title: "Speak", action: #selector(speakSelection))
         menuController.menuItems = [speakItem]
         self.isEditing = UserDefaults.standard.bool(forKey: "document_edit_on_open")
+        
+        let respondToUndoOrRedo = {
+            (notification: Notification) -> Void in
+            self.undoButton?.isEnabled = self.textView.undoManager?.canUndo == true
+        }
+        
+        didUndoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSUndoManagerDidRedoChange, object: nil, queue: nil, using: respondToUndoOrRedo)
+        didRedoObserver = NotificationCenter.default.addObserver(forName: NSNotification.Name.NSUndoManagerDidRedoChange, object: nil, queue: nil, using: respondToUndoOrRedo)
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -221,6 +240,12 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     func updateBarItems() {
         var rightButtonItems : [UIBarButtonItem] = []
         rightButtonItems.append(self.editButtonItem)
+        if isEditing {
+            undoButton = UIBarButtonItem(barButtonSystemItem: .undo, target: self.textView?.undoManager, action: #selector(UndoManager.undo))
+            undoButton?.isEnabled = self.textView?.undoManager?.canUndo == true
+            rightButtonItems.append(undoButton!)
+        }
+        
         self.navigationItem.rightBarButtonItems = rightButtonItems
     }
     
@@ -281,6 +306,7 @@ class DocumentViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        self.undoButton?.isEnabled = self.textView.undoManager?.canUndo == true
         document?.text = textView.attributedText
         document?.updateChangeCount(.done)
     }
